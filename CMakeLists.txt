@@ -12,7 +12,7 @@ find_package(glm REQUIRED)
 find_package(GLEW REQUIRED)
 
 set(SOURCES
-	"src/main.cpp"
+	"src/Main.cpp"
 	"src/utils.cpp"
 	"depends/imgui/imgui_impl_glfw.cpp"
 	"depends/imgui/imgui_impl_opengl3.cpp"

@@ -15,7 +15,11 @@ int main(int, char**)
     // unsigned int shaderProgram = createProgram("./shaders/vshader.vs", "./shaders/fshader.fs");
     // glUseProgram(shaderProgram);
 
-
+    int my_image_width = 0;
+    int my_image_height = 0;
+    GLuint my_image_texture = 0;
+    bool ret = LoadTextureFromFile("../stb/toon.png", &my_image_texture, &my_image_width, &my_image_height);
+    IM_ASSERT(ret);
 
     while (!glfwWindowShouldClose(window))
     {
@@ -28,7 +32,7 @@ int main(int, char**)
 
         // glUseProgram(shaderProgram);
         showOptionsDialog();
-        showSceneWindow();
+        showSceneWindow(my_image_width,my_image_height,my_image_texture);
 
         // if (io.KeyCtrl){
         //     std::cout << "ctrl pressed" << std::endl;

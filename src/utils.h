@@ -52,10 +52,11 @@ const char * setGLSLVersion();
 GLuint createShader(const char* filename, GLenum type);
 unsigned int createProgram(const char *vshader_filename, const char* fshader_filename);
 char * getShaderCode(const char*);
+bool LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height);
 
 void cleanup(GLFWwindow* );
 void showOptionsDialog(); 
-void showSceneWindow(); 
+void showSceneWindow(int &my_image_width, int &my_image_height, GLuint &my_image_texture); 
 
 GLFWwindow* setupWindow(int, int);
 
