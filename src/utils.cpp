@@ -8,83 +8,46 @@ void cleanup(GLFWwindow* window){
     glfwDestroyWindow(window);
     glfwTerminate();
 }
-void setupModelTransformation(int program)
-{
-    //Modelling transformations (Model -> World coordinates)
-    glm::mat4 modelT = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.0, 0.0));//Model coordinates are the world coordinates
 
-    //Pass on the modelling matrix to the vertex shader
-    glUseProgram(program);
-    GLuint vModel_uniform = glGetUniformLocation(program, "vModel");
-    if(vModel_uniform == -1){
-        fprintf(stderr, "Could not bind location: vModel\n");
-        exit(0);
-    }
-    glUniformMatrix4fv(vModel_uniform, 1, GL_FALSE, glm::value_ptr(modelT));
-}
+void showOptionsDialog(){
+        ImGui::SetNextWindowSize(ImVec2((float)100, (float)450), ImGuiCond(0));
+        ImGui::Begin("Tools");
+        if(ImGui::Button("Select Mesh")) {
+            std::cout<<"mesh selected\n";
+        }
+        if(ImGui::Button("Emit")) {
+            std::cout<<"Emmit\n";
+        }
+        if(ImGui::Button("Oscillation texture")) {
+            std::cout<<"Oscilate\n";
+        }
+        // double current_seconds = glfwGetTime();
+        // ImGui::Text("Time: (current_seconds) %f", current_seconds);
+        // if(ImGui::SliderFloat("Angle(radians)", &angle, 0.0f, 3.14f)){
+        //         std::cout << angle << std::endl;
+        //         int mat_loc = glGetUniformLocation(program, "vModel");
+        //         glm::mat4 rotate_mat = glm::rotate(glm::make_mat4(matrix), angle, glm::vec3(0,1,0));
+        //         glUniformMatrix4fv(mat_loc, 1, GL_FALSE, (&rotate_mat[0][0]));
 
-void setupViewTransformation(int program)
-{
-    //Viewing transformations (World -> Camera coordinates
-    // glm::mat4 viewT = glm::lookAt(glm::vec3(1.0, 0.0, 0.0), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
-    //Camera at (0, 0, 20) looking down the negative Z-axis in a right handed coordinate system
-    // glm::mat4 viewT = glm::mat4(1.0);
-    glm::mat4 viewT = glm::lookAt(glm::vec3(0.0, 0.0, 1.0), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
-    //Pass on the viewing matrix to the vertex shader
-    glUseProgram(program);
-    GLuint vView_uniform = glGetUniformLocation(program, "vView");
-    if(vView_uniform == -1){
-        fprintf(stderr, "Could not bind location: vView\n");
-        exit(0);
-    }
-    glUniformMatrix4fv(vView_uniform, 1, GL_FALSE, glm::value_ptr(viewT));
-}
-
-void setupProjectionTransformation(int program, int screen_width, int screen_height)
-{
-    //Projection transformation (Orthographic projection)
-    // float aspect = (float)screen_width/(float)screen_height;
-    float view_height = float(2);
-    float aspect = (float)screen_width/(float)screen_height;
-    glm::mat4 projectionT = glm::ortho(-view_height*aspect/2.0f, view_height*aspect/2.0f, -view_height/2.0f, view_height/2.0f, 0.8f, 1000.0f);
-    // glm::mat4 projectionT = glm::perspective(45.0f, aspect, 0.1f, 100.0f);
-    // glm::mat4 projectionT = glm::mat4(1.0);
-    //Pass on the projection matrix to the vertex shader
-    glUseProgram(program);
-    GLuint vProjection_uniform = glGetUniformLocation(program, "vProjection");
-    if(vProjection_uniform == -1){
-        fprintf(stderr, "Could not bind location: vProjection\n");
-        exit(0);
-    }
-    glUniformMatrix4fv(vProjection_uniform, 1, GL_FALSE, glm::value_ptr(projectionT));
-}
-
-void setupLightPos(int program, glm::vec3 light_pos){
-    glUseProgram(program);
-    GLuint light_position_world = glGetUniformLocation(program, "lpos_world");
-    std::cout << light_position_world << std::endl;
-    if(light_position_world == -1){
-        fprintf(stderr, "Could not bind location: light_position_world\n");
-        // exit(0);
-    }
-    glUniform3fv(light_position_world, 1, glm::value_ptr(light_pos));
-
-}
-
-void showOptionsDialog(unsigned  int &program, float &angle, float matrix[]){
-        ImGui::Begin("Window1");
-        double current_seconds = glfwGetTime();
-        ImGui::Text("Time: (current_seconds) %f", current_seconds);
-        if(ImGui::SliderFloat("Angle(radians)", &angle, 0.0f, 3.14f)){
-                std::cout << angle << std::endl;
-                int mat_loc = glGetUniformLocation(program, "vModel");
-                glm::mat4 rotate_mat = glm::rotate(glm::make_mat4(matrix), angle, glm::vec3(0,1,0));
-                glUniformMatrix4fv(mat_loc, 1, GL_FALSE, (&rotate_mat[0][0]));
-
-        };
-
+        // };
         ImGui::End();
 }
+
+void showSceneWindow(){
+        ImGui::SetNextWindowSize(ImVec2((float)980, (float)450), ImGuiCond(0));
+        ImGui::Begin("Scene Window");
+        // ImGui::SetWindowSize(ImVec2((float)640, (float)360));
+        // double current_seconds = glfwGetTime();
+        // ImGui::Text("Time: (current_seconds) %f", current_seconds);
+        // if(ImGui::SliderFloat("Angle(radians)", &angle, 0.0f, 3.14f)){
+        //         std::cout << angle << std::endl;
+        //         int mat_loc = glGetUniformLocation(program, "vModel");
+        //         glm::mat4 rotate_mat = glm::rotate(glm::make_mat4(matrix), angle, glm::vec3(0,1,0));
+        //         glUniformMatrix4fv(mat_loc, 1, GL_FALSE, (&rotate_mat[0][0]));
+        // };
+        ImGui::End();
+}
+
 void setVAO(unsigned int &VAO){
     glBindVertexArray(VAO);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);

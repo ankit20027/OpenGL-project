@@ -54,11 +54,8 @@ unsigned int createProgram(const char *vshader_filename, const char* fshader_fil
 char * getShaderCode(const char*);
 
 void cleanup(GLFWwindow* );
-void setupLightPos(int, glm::vec3	);
-void setupProjectionTransformation(int, int, int);
-void setupViewTransformation(int);
-void setupModelTransformation(int);
-void showOptionsDialog(unsigned int &program, float &, float []); 
+void showOptionsDialog(); 
+void showSceneWindow(); 
 
 GLFWwindow* setupWindow(int, int);
 
