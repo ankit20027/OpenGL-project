@@ -1,3 +1,0 @@
-/home/panda/workspace/CG/OpenGL-project/build/CMakeFiles/Lab04.dir
-/home/panda/workspace/CG/OpenGL-project/build/CMakeFiles/edit_cache.dir
-/home/panda/workspace/CG/OpenGL-project/build/CMakeFiles/rebuild_cache.dir
