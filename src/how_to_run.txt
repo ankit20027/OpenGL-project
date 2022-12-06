@@ -1,1 +1,0 @@
-g++ -Wall -o test main.cpp -lm -lGL -lGLUT

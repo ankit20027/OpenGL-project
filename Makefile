@@ -1,5 +1,6 @@
-all: main
-
-main:
-	@g++ -o test Main.cpp -lGL -lglut -lGLU
-	@./test
+all: Scene
+clean:
+	@rm Scene
+Scene:
+	@g++ Main.cpp Animals.cpp Ground.cpp Hill.cpp Sky.cpp Nature.cpp Planets.cpp utils.cpp -o Scene -lGL -lglut -lGLU	
+	@./Scene
